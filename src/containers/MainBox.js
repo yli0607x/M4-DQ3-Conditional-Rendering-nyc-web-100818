@@ -4,6 +4,21 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    page: ""
+  }
+
+  pageMapper = {
+    profile: <Profile />,
+    photo: <Photos />,
+    cocktail: <Cocktails />,
+    pokemon: <Pokemon />
+  }
+
+  handleMenuBarClick = (clickedItem) => {
+    this.setState({page: clickedItem})
+  }
+
 
   render() {
 
@@ -13,11 +28,31 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+
+    let detailsToDisplay = this.pageMapper[this.state.page] || <div>YERRRRRRRRRRR</div>
+    // Profile, Photos, Cocktails, Pokemon
+
+    // switch(this.state.page){
+    //   case "profile":
+    //   detailsToDisplay = <Profile />
+    //   break
+    //   case "photo":
+    //   detailsToDisplay = <Photos />
+    //   break
+    //   case "cocktail":
+    //   detailsToDisplay = <Cocktails />
+    //   break
+    //   case "pokemon":
+    //   detailsToDisplay = <Pokemon />
+    //   break
+    //   default:
+    //   detailsToDisplay = <div>YERRRRRRRRRRR</div>
+    // }
+
 
     return (
       <div>
-        <MenuBar />
+        <MenuBar onClick={this.handleMenuBarClick} />
         {detailsToDisplay}
       </div>
     )
